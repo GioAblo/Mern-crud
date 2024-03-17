@@ -2,12 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const FoodModel = require('./models/Food');
 const cors = require('cors')
+require('dotenv').config()
 
+
+const port = process.env.PORT
 const app = express();
 app.use(express.json());
 app.use(cors())
 
-mongoose.connect('mongodb+srv://ablootia1993:Password321@crud0.k0i25qg.mongodb.net/food?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGO_URL);
 
 
 
@@ -59,6 +62,6 @@ app.delete('/delete/:id', async(req, res) => {
 })
 
 
-app.listen(3001, () => {
+app.listen(port, () => {
     console.log("Server runs on port 3001");
 })
